@@ -33,15 +33,15 @@ const serviceItems = [
 const Services = () => {
   return (
     <section id="oferta" className="section-padding bg-white">
-      <div className="container-custom">
-        <div className="text-center mb-12">
+      <div className="container-custom px-3 sm:px-4">
+        <div className="text-center mb-8 md:mb-12">
           <h2 className="section-title animate-fade-in">Nasza oferta</h2>
           <p className="section-subtitle animate-fade-in">
             Szeroki zakres usług ogrodniczych realizowanych z pasją i profesjonalizmem
           </p>
         </div>
         
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
           {serviceItems.map((service, index) => (
             <div 
               key={index} 
@@ -49,10 +49,10 @@ const Services = () => {
               style={{ animationDelay: `${0.1 * index}s` }}
             >
               <div className="flex items-center mb-4">
-                <div className="rounded-full bg-cerber-green-pale p-3 mr-4">
-                  <service.icon className="h-7 w-7 text-cerber-green-dark" />
+                <div className="rounded-full bg-cerber-green-pale p-2 sm:p-3 mr-3 sm:mr-4">
+                  <service.icon className="h-5 w-5 sm:h-7 sm:w-7 text-cerber-green-dark" />
                 </div>
-                <h3 className="text-lg font-semibold text-cerber-green-dark">
+                <h3 className="text-base sm:text-lg font-semibold text-cerber-green-dark">
                   {service.title}
                 </h3>
               </div>
@@ -63,7 +63,7 @@ const Services = () => {
           ))}
         </div>
         
-        <div className="mt-12 text-center animate-fade-in" style={{ animationDelay: '0.6s' }}>
+        <div className="mt-8 md:mt-12 text-center animate-fade-in" style={{ animationDelay: '0.6s' }}>
           <a href="#kontakt" className="cta-button">
             Zamów bezpłatną wycenę
           </a>
