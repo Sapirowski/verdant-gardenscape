@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -61,6 +62,16 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				// Custom color palette for Cerber Ogrodnictwo
+				cerber: {
+					'green-dark': '#1F4A2C',
+					'green-medium': '#2E6B41',
+					'green-light': '#4DAA6E',
+					'green-pale': '#DCEEE4',
+					'brown': '#59422F',
+					'beige': '#F2E7D5',
+					'gray': '#E9ECE6',
 				}
 			},
 			borderRadius: {
@@ -84,12 +95,54 @@ export default {
 					to: {
 						height: '0'
 					}
+				},
+				'fade-in': {
+					'0%': {
+						opacity: '0',
+						transform: 'translateY(10px)'
+					},
+					'100%': {
+						opacity: '1',
+						transform: 'translateY(0)'
+					}
+				},
+				'fade-in-right': {
+					'0%': {
+						opacity: '0',
+						transform: 'translateX(20px)'
+					},
+					'100%': {
+						opacity: '1',
+						transform: 'translateX(0)'
+					}
+				},
+				'scale-in': {
+					'0%': {
+						opacity: '0',
+						transform: 'scale(0.95)'
+					},
+					'100%': {
+						opacity: '1',
+						transform: 'scale(1)'
+					}
+				},
+				'leaf-sway': {
+					'0%, 100%': { transform: 'rotate(-5deg)' },
+					'50%': { transform: 'rotate(5deg)' },
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
-			}
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'fade-in': 'fade-in 0.6s ease-out',
+				'fade-in-right': 'fade-in-right 0.6s ease-out',
+				'scale-in': 'scale-in 0.5s ease-out',
+				'leaf-sway': 'leaf-sway 3s ease-in-out infinite',
+			},
+			fontFamily: {
+				'sans': ['Poppins', 'sans-serif'],
+				'serif': ['Playfair Display', 'serif'],
+			},
 		}
 	},
 	plugins: [require("tailwindcss-animate")],
