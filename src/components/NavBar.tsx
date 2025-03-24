@@ -58,7 +58,7 @@ const NavBar = () => {
   };
 
   const menuItems = [
-    { name: 'O nas', href: '#o-nas' },
+    { name: 'O nas', href: '/o-nas', isPageLink: true },
     { name: 'Oferta', href: '#oferta', hasDropdown: true },
     { name: 'Realizacje', href: '#realizacje' },
     { name: 'Opinie', href: '#opinie' },
@@ -75,7 +75,7 @@ const NavBar = () => {
     >
       <div className="container mx-auto px-4 flex justify-between items-center">
         {/* Logo */}
-        <a href="#" className="flex items-center gap-2 z-20">
+        <a href="/" className="flex items-center gap-2 z-20">
           <Leaf 
             className={`h-6 w-6 md:h-7 md:w-7 ${
               isScrolled || isOpen ? 'text-cerber-green-dark' : 'text-cerber-green-light'
@@ -124,18 +124,33 @@ const NavBar = () => {
                 </DropdownMenuContent>
               </DropdownMenu>
             ) : (
-              <a 
-                key={item.name} 
-                href={item.href}
-                className={`${
-                  isScrolled ? 'text-cerber-green-dark' : 'text-white'
-                } text-sm lg:text-base hover:text-cerber-green-light font-medium transition-colors duration-300 
-                relative after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-0.5 
-                after:bottom-0 after:left-0 after:bg-cerber-green-light after:origin-bottom-right 
-                after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left`}
-              >
-                {item.name}
-              </a>
+              item.isPageLink ? (
+                <a 
+                  key={item.name} 
+                  href={item.href}
+                  className={`${
+                    isScrolled ? 'text-cerber-green-dark' : 'text-white'
+                  } text-sm lg:text-base hover:text-cerber-green-light font-medium transition-colors duration-300 
+                  relative after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-0.5 
+                  after:bottom-0 after:left-0 after:bg-cerber-green-light after:origin-bottom-right 
+                  after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left`}
+                >
+                  {item.name}
+                </a>
+              ) : (
+                <a 
+                  key={item.name} 
+                  href={item.href}
+                  className={`${
+                    isScrolled ? 'text-cerber-green-dark' : 'text-white'
+                  } text-sm lg:text-base hover:text-cerber-green-light font-medium transition-colors duration-300 
+                  relative after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-0.5 
+                  after:bottom-0 after:left-0 after:bg-cerber-green-light after:origin-bottom-right 
+                  after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left`}
+                >
+                  {item.name}
+                </a>
+              )
             )
           ))}
           
