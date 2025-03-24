@@ -10,6 +10,11 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible";
 
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -30,17 +35,26 @@ const NavBar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    // Hide mobile menu on screen resize
+    const handleResize = () => {
+      if (window.innerWidth >= 768 && isOpen) {
+        setIsOpen(false);
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [isOpen]);
+
   const toggleMenu = () => {
     setIsOpen(!isOpen);
-  };
-
-  const toggleServices = () => {
-    setServicesOpen(!servicesOpen);
   };
 
   const handleServiceClick = (slug: string) => {
     navigate(`/uslugi/${slug}`);
     setIsOpen(false);
+    setServicesOpen(false);
   };
 
   const menuItems = [
@@ -64,12 +78,12 @@ const NavBar = () => {
         <a href="#" className="flex items-center gap-2 z-20">
           <Leaf 
             className={`h-6 w-6 md:h-7 md:w-7 ${
-              isScrolled ? 'text-cerber-green-dark' : 'text-cerber-green-light'
+              isScrolled || isOpen ? 'text-cerber-green-dark' : 'text-cerber-green-light'
             } animate-leaf-sway`} 
           />
           <span 
             className={`font-serif font-bold text-lg md:text-xl ${
-              isScrolled ? 'text-cerber-green-dark' : 'text-white'
+              isScrolled || isOpen ? 'text-cerber-green-dark' : 'text-white'
             } truncate`}
           >
             Cerber Ogrodnictwo
@@ -81,16 +95,18 @@ const NavBar = () => {
           {menuItems.map((item) => (
             item.hasDropdown ? (
               <DropdownMenu key={item.name}>
-                <DropdownMenuTrigger className="flex items-center gap-1">
-                  <a 
-                    href={item.href}
-                    className={`${
-                      isScrolled ? 'text-cerber-green-dark' : 'text-white'
-                    } text-sm lg:text-base hover:text-cerber-green-light font-medium transition-colors duration-300 flex items-center gap-1`}
-                  >
-                    {item.name}
-                    <ChevronDown className="h-4 w-4" />
-                  </a>
+                <DropdownMenuTrigger asChild>
+                  <button className="flex items-center gap-1">
+                    <a 
+                      href={item.href}
+                      className={`${
+                        isScrolled ? 'text-cerber-green-dark' : 'text-white'
+                      } text-sm lg:text-base hover:text-cerber-green-light font-medium transition-colors duration-300 flex items-center gap-1`}
+                    >
+                      {item.name}
+                      <ChevronDown className="h-4 w-4" />
+                    </a>
+                  </button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent className="bg-white shadow-lg rounded-md p-2 min-w-[200px]">
                   {serviceItems.map((service) => (
@@ -140,7 +156,7 @@ const NavBar = () => {
           aria-label="Toggle menu"
         >
           {isOpen ? (
-            <X className={`h-6 w-6 ${isScrolled ? 'text-cerber-green-dark' : 'text-white'}`} />
+            <X className={`h-6 w-6 ${isScrolled ? 'text-cerber-green-dark' : 'text-cerber-green-dark'}`} />
           ) : (
             <Menu className={`h-6 w-6 ${isScrolled ? 'text-cerber-green-dark' : 'text-white'}`} />
           )}
@@ -156,38 +172,34 @@ const NavBar = () => {
         <div className="flex flex-col items-center gap-5 px-4 w-full max-w-sm">
           {menuItems.map((item, index) => (
             item.hasDropdown ? (
-              <div 
+              <Collapsible 
                 key={item.name} 
                 className="w-full"
-                style={{ animationDelay: `${index * 0.1}s` }}
+                open={servicesOpen}
+                onOpenChange={setServicesOpen}
               >
-                <button 
-                  onClick={toggleServices}
-                  className="animate-fade-in text-cerber-green-dark text-xl font-medium py-3 border-b border-cerber-green-pale w-full text-center flex items-center justify-center gap-2"
-                >
+                <CollapsibleTrigger className="animate-fade-in text-cerber-green-dark text-xl font-medium py-3 border-b border-cerber-green-pale w-full text-center flex items-center justify-center gap-2">
                   {item.name}
                   {servicesOpen ? (
                     <ChevronUp className="h-5 w-5" />
                   ) : (
                     <ChevronDown className="h-5 w-5" />
                   )}
-                </button>
+                </CollapsibleTrigger>
                 
-                {servicesOpen && (
-                  <div className="mt-2 w-full">
-                    {serviceItems.map((service) => (
-                      <button
-                        key={service.slug}
-                        onClick={() => handleServiceClick(service.slug)}
-                        className="flex items-center gap-2 py-2 px-4 w-full hover:bg-cerber-green-pale/30 rounded-md text-cerber-green-dark"
-                      >
-                        <service.icon className="h-5 w-5" />
-                        <span>{service.title}</span>
-                      </button>
-                    ))}
-                  </div>
-                )}
-              </div>
+                <CollapsibleContent className="mt-2 w-full">
+                  {serviceItems.map((service) => (
+                    <button
+                      key={service.slug}
+                      onClick={() => handleServiceClick(service.slug)}
+                      className="flex items-center gap-2 py-2 px-4 w-full hover:bg-cerber-green-pale/30 rounded-md text-cerber-green-dark"
+                    >
+                      <service.icon className="h-5 w-5" />
+                      <span>{service.title}</span>
+                    </button>
+                  ))}
+                </CollapsibleContent>
+              </Collapsible>
             ) : (
               <a 
                 key={item.name} 
