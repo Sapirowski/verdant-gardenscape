@@ -1,34 +1,7 @@
 
 import React from 'react';
-import { Shovel, TreeDeciduous, Flower2, Shrub, Droplet } from 'lucide-react';
-
-const serviceItems = [
-  {
-    title: "Kompleksowa aranżacja ogrodów",
-    description: "Projektujemy i realizujemy kompleksowe projekty ogrodów, terenów zielonych i przestrzeni publicznych.",
-    icon: TreeDeciduous,
-  },
-  {
-    title: "Pielęgnacja trawników i żywopłotów",
-    description: "Regularne strzyżenie, nawożenie, wertykulacja, aeracja i odchwaszczanie trawników oraz żywopłotów.",
-    icon: Shrub,
-  },
-  {
-    title: "Usługi minikoparką i frezem",
-    description: "Profesjonalne prace ziemne, wykopy, wyrównanie terenu, usuwanie pni za pomocą specjalistycznego sprzętu.",
-    icon: Shovel,
-  },
-  {
-    title: "Opieka nad ogrodami cmentarnymi",
-    description: "Kompleksowa pielęgnacja, porządkowanie, sadzenie roślin i dbanie o ogrody cmentarne przez cały rok.",
-    icon: Droplet,
-  },
-  {
-    title: "Innowacyjne rozwiązania dla parków",
-    description: "Wdrażanie nowoczesnych rozwiązań dla przestrzeni publicznych, parków i skwerów miejskich.",
-    icon: Flower2,
-  }
-];
+import ServiceCard from './services/ServiceCard';
+import { serviceItems } from './services/ServicesData';
 
 const Services = () => {
   return (
@@ -43,23 +16,14 @@ const Services = () => {
         
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
           {serviceItems.map((service, index) => (
-            <div 
-              key={index} 
-              className="card-service animate-scale-in"
-              style={{ animationDelay: `${0.1 * index}s` }}
-            >
-              <div className="flex items-center mb-4">
-                <div className="rounded-full bg-cerber-green-pale p-2 sm:p-3 mr-3 sm:mr-4">
-                  <service.icon className="h-5 w-5 sm:h-7 sm:w-7 text-cerber-green-dark" />
-                </div>
-                <h3 className="text-base sm:text-lg font-semibold text-cerber-green-dark">
-                  {service.title}
-                </h3>
-              </div>
-              <p className="text-cerber-green-medium text-sm lg:text-base">
-                {service.description}
-              </p>
-            </div>
+            <ServiceCard
+              key={index}
+              title={service.title}
+              description={service.description}
+              icon={service.icon}
+              slug={service.slug}
+              index={index}
+            />
           ))}
         </div>
         
