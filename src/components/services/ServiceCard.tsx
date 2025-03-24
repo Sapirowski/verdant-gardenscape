@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { LucideIcon } from 'lucide-react';
+import { LucideIcon, ArrowRight } from 'lucide-react';
 
 interface ServiceCardProps {
   title: string;
@@ -16,7 +16,7 @@ const ServiceCard = ({ title, description, icon: Icon, slug, index }: ServiceCar
   
   return (
     <div 
-      className="card-service animate-scale-in cursor-pointer hover:shadow-md transition-all duration-300"
+      className="card-service animate-scale-in cursor-pointer hover:shadow-md transition-all duration-300 relative pb-10"
       style={{ animationDelay: `${0.1 * index}s` }}
       onClick={() => navigate(`/uslugi/${slug}`)}
     >
@@ -28,9 +28,13 @@ const ServiceCard = ({ title, description, icon: Icon, slug, index }: ServiceCar
           {title}
         </h3>
       </div>
-      <p className="text-cerber-green-medium text-sm lg:text-base">
+      <p className="text-cerber-green-medium text-sm lg:text-base mb-4">
         {description}
       </p>
+      <div className="absolute bottom-2 right-2 flex items-center text-cerber-green-dark font-medium text-sm">
+        <span>Dowiedz się więcej</span>
+        <ArrowRight className="ml-1 h-4 w-4" />
+      </div>
     </div>
   );
 };
