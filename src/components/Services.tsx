@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Shovel, TreeDeciduous, Flower2, Shrub, WateringCan } from 'lucide-react';
+import { Shovel, TreeDeciduous, Flower2, Shrub, Droplet } from 'lucide-react';
 
 const serviceItems = [
   {
@@ -21,7 +21,7 @@ const serviceItems = [
   {
     title: "Opieka nad ogrodami cmentarnymi",
     description: "Kompleksowa pielęgnacja, porządkowanie, sadzenie roślin i dbanie o ogrody cmentarne przez cały rok.",
-    icon: WateringCan,
+    icon: Droplet,
   },
   {
     title: "Innowacyjne rozwiązania dla parków",
