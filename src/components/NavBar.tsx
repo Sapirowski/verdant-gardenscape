@@ -103,7 +103,6 @@ const NavBar = () => {
             <a 
               key={item} 
               href={`#${item.toLowerCase().replace(' ', '-')}`}
-              className="text-cerber-green-dark text-xl font-medium py-3 border-b border-cerber-green-pale w-full text-center"
               onClick={() => setIsOpen(false)}
               style={{ animationDelay: `${index * 0.1}s` }}
               className="animate-fade-in text-cerber-green-dark text-xl font-medium py-3 border-b border-cerber-green-pale w-full text-center"
